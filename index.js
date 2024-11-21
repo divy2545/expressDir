@@ -48,7 +48,7 @@ app.listen(port,()=>{
 
 
 
-//======================================================
+//====================== path parameters ================================
 
 app.get("/",(req,res)=>{
     res.send("this is the root path");
@@ -57,8 +57,31 @@ app.get("/",(req,res)=>{
 app.get("/:username/:id",(req,res)=>{
     console.log(req.params);
     let {username,id}=req.params;
+   
+    htmlStr=`<h1>welcome to the page of @${username} !!</h1>`;
+    res.send(htmlStr);
+    
+    
+})
 
-    res.send(`welcome to the page of apna`)
+
+
+//====================================================================
+//                  query string
+//====================================================================
+
+
+// app.get("/search",(req,res)=>{
+//     console.log(req.query);
+//     res.send("no request");
     
-    
+// })
+
+
+app.get("/search",(req,res)=>{
+    let {q}=req.query;
+    if(!q){
+        res.send("<h1>nothing searched</h1>");
+    }
+    res.send(`<h1>search results for query: ${q}</h1>`)
 })
